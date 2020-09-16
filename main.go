@@ -4,12 +4,12 @@ package main
 
 import (
 	"flag"
-	"multibot/context"
 	"sync"
 
+	log "github.com/sirupsen/logrus"
 	"gopkg.in/telegram-bot-api.v4"
 
-	log "github.com/sirupsen/logrus"
+	"github.com/paper2code/golang-telegram-multibot/v2/context"
 )
 
 var (

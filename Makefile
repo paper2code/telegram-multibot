@@ -4,15 +4,9 @@ PLUGINS:=reminder filer
 
 all: multibot subdirs
 
-multibot: deps
+multibot:
 	@echo "Building ${PROJECT_NAME}"
 	@go build
-
-deps:
-	@echo "Installing dep..."
-	@$(GO_GET) -u github.com/golang/dep/cmd/dep
-	@echo "Download dependencies..."
-	@dep ensure
 
 subdirs: bin_plugins $(PLUGINS)
 

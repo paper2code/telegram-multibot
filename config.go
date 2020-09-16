@@ -3,10 +3,10 @@
 package main
 
 import (
-	"multibot/context"
-
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+
+	"github.com/paper2code/golang-telegram-multibot/v2/context"
 )
 
 var options *context.Options

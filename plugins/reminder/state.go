@@ -2,10 +2,11 @@ package main
 
 import (
 	"errors"
-	"multibot/context"
 	"time"
 
 	"github.com/go-pg/pg"
+
+	"github.com/paper2code/golang-telegram-multibot/v2/context"
 )
 
 const (

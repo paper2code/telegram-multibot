@@ -1,6 +1,6 @@
 package main
 
-import "multibot/context"
+import "github.com/paper2code/golang-telegram-multibot/v2/context"
 
 const (
 	commandsAddCommand  = "ssh_commands_add"

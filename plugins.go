@@ -3,14 +3,14 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"multibot/context"
 	"os"
 	"path/filepath"
 	"plugin"
 
+	log "github.com/sirupsen/logrus"
 	"gopkg.in/telegram-bot-api.v4"
 
-	log "github.com/sirupsen/logrus"
+	"github.com/paper2code/golang-telegram-multibot/v2/context"
 )
 
 // BotPlugin struct for store one plugin

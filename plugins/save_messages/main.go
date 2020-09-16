@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"multibot/context"
 	"os"
 
 	"gopkg.in/telegram-bot-api.v4"
+
+	"github.com/paper2code/golang-telegram-multibot/v2/context"
 )
 
 var (
