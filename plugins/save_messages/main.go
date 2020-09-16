@@ -7,7 +7,7 @@ import (
 
 	"gopkg.in/telegram-bot-api.v4"
 
-	"github.com/paper2code/golang-telegram-multibot/v2/context"
+	"github.com/paper2code/golang-telegram-multibot/v2/pkg/context"
 )
 
 var (
@@ -40,7 +40,7 @@ func GetCommands() []string {
 
 // UpdateHandler function call for each update
 func UpdateHandler(update tgbotapi.Update) (err error) {
-	if f, err = os.OpenFile("qwe.txt", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644); err != nil {
+	if f, err = os.OpenFile("multibot.txt", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644); err != nil {
 		return
 	}
 	defer f.Close()
@@ -58,7 +58,7 @@ func RunCommand(command string, update tgbotapi.Update) (err error) {
 }
 
 func runShowFile(chatID int64) (err error) {
-	if f, err = os.OpenFile("qwe.txt", os.O_RDONLY, 0644); err != nil {
+	if f, err = os.OpenFile("multibot.txt", os.O_RDONLY, 0644); err != nil {
 		return
 	}
 	defer f.Close()

@@ -34,12 +34,14 @@ func LoadPlugins() (err error) {
 	botPlugins = make(map[string]*BotPlugin)
 	botPluginsByCommand = make(map[string]*BotPlugin)
 
+	log.Debugf("Try to load plugins from: %s", options.PluginDir)
 	if pluginFiles, err = ioutil.ReadDir(options.PluginDir); err != nil {
 		return
 	}
 
 	for _, pluginFile := range pluginFiles {
 		if pluginFile.IsDir() {
+			log.Debugf("pluginFile.IsDir: %s", pluginFile.Name())
 			continue
 		}
 		log.Debugf("Try to load plugin: %s", pluginFile.Name())

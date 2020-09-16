@@ -1,10 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"time"
 
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/telegram-bot-api.v4"
+	"gorm.io/gorm"
 
 	"github.com/paper2code/golang-telegram-multibot/v2/pkg/context"
 )
@@ -12,9 +14,10 @@ import (
 var ctx *context.MultiBotContext
 
 type Log struct {
+	gorm.Model
 	Timestamp time.Time
 	Text      string
-	*tgbotapi.Message
+	Message   string
 }
 
 // InitPlugin initialize plugin if it needed
@@ -43,8 +46,12 @@ func GetCommands() []string {
 // UpdateHandler function call for each update
 func UpdateHandler(update tgbotapi.Update) (err error) {
 	log.Debugf("%s", update.Message.Text)
-	l := Log{time.Now(), update.Message.Text, update.Message}
-	err = ctx.GetDB().Save(&l).Error
+	msg, err := json.Marshal(&update.Message)
+	if err != nil {
+		return err
+	}
+	l := Log{Timestamp: time.Now(), Text: update.Message.Text, Message: string(msg)}
+	err = ctx.GetDB().Create(&l).Error
 	return
 }
 
