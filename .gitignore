@@ -6,3 +6,4 @@ qwe.txt
 Gopkg.lock
 vendor
 golang-telegram-multibot
+*.db
