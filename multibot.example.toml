@@ -1,0 +1,16 @@
+[main]
+  api_key = ""
+  plugin_dir = "./shared/plugins"
+  debug = true
+
+[db]
+  driver = "sqlite3"
+  name = "./shared/data/paper2code.db"
+  user = ""
+  password = ""
+  host = ""
+  port = ""
+  secure = false
+
+[log]
+  level = "info"
