@@ -36,7 +36,7 @@ func main() {
 		log.SetLevel(level)
 	}
 
-	if err = InitDatabase(); err != nil {
+	if err = initDatabase(); err != nil {
 		log.Fatalf("Unable to connect to database: %s", err)
 	}
 
@@ -46,7 +46,7 @@ func main() {
 	log.Debug("Telegram bot initialized sucessful")
 	botContext = context.InitContext(db, bot, options, log.StandardLogger())
 
-	if err = LoadPlugins(); err != nil {
+	if err = loadPlugins(); err != nil {
 		log.Fatalf("Unable to load plugins: %s", err)
 	}
 

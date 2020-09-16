@@ -34,7 +34,7 @@ func (f *File) Upload() (err error) {
 		log.Errorf("Unable to get file from telegram with ID %s: %s", f.FileID, err)
 		return
 	}
-	if err = ctx.GetDB().Insert(f); err != nil {
+	if err = ctx.GetDB().Save(&f).Error; err != nil {
 		log.Errorf("Unable to store file in database: %s", err)
 		return
 	}
@@ -53,6 +53,6 @@ func (f *File) generateNewSecretPhrase() {
 }
 
 func getFiles() (files []*File, err error) {
-	err = ctx.GetDB().Model(&files).Select()
+	err = ctx.GetDB().Find(&files).Error
 	return
 }

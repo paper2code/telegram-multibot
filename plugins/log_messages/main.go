@@ -48,7 +48,7 @@ func UpdateHandler(update tgbotapi.Update) (err error) {
 		Message:   update.Message,
 		Text:      update.Message.Text,
 	}
-	err = ctx.GetDB().Insert(&l)
+	err = ctx.GetDB().Save(&l).Error
 	return
 }
 

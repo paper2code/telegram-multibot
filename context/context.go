@@ -7,10 +7,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/go-pg/pg"
-	"github.com/go-pg/pg/orm"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/telegram-bot-api.v4"
+	"gorm.io/gorm"
 )
 
 const telegramMaximumMessageSize = 4096
@@ -19,7 +18,13 @@ const telegramMaximumMessageSize = 4096
 type Options struct {
 	AppName         string
 	APIKey          string
-	PgSQLDSN        string
+	DBDriver        string
+	DBName          string
+	DBUser          string
+	DBPassword      string
+	DBHost          string
+	DBPort          string
+	DBSecure        bool
 	LogLevel        string
 	Debug           bool
 	PluginDir       string
@@ -28,14 +33,14 @@ type Options struct {
 
 // MultiBotContext is a struct with methods for interact bot with plugins
 type MultiBotContext struct {
-	db      *pg.DB
+	db      *gorm.DB
 	bot     *tgbotapi.BotAPI
 	options *Options
 	log     *log.Logger
 }
 
 // InitContext initialize context and return it pointer
-func InitContext(db *pg.DB, bot *tgbotapi.BotAPI, options *Options, l *log.Logger) *MultiBotContext {
+func InitContext(db *gorm.DB, bot *tgbotapi.BotAPI, options *Options, l *log.Logger) *MultiBotContext {
 	mbc := &MultiBotContext{
 		db:      db,
 		bot:     bot,
@@ -128,12 +133,12 @@ func (ctx *MultiBotContext) saveTextToFileAndGetName(msgText string) string {
 
 // DBCreateTable create table in database by struct
 func (ctx *MultiBotContext) DBCreateTable(data interface{}) (err error) {
-	err = ctx.db.CreateTable(data, &orm.CreateTableOptions{IfNotExists: true})
+	err = ctx.db.AutoMigrate(data)
 	return
 }
 
 // GetDB return database pointer
-func (ctx *MultiBotContext) GetDB() *pg.DB {
+func (ctx *MultiBotContext) GetDB() *gorm.DB {
 	return ctx.db
 }
 
@@ -149,7 +154,7 @@ func (ctx *MultiBotContext) GetOptions(pluginName string) map[string]interface{}
 
 // DBInsert insert data to database
 func (ctx *MultiBotContext) DBInsert(data interface{}) (err error) {
-	err = ctx.db.Insert(data)
+	err = ctx.db.Save(data).Error
 	return
 }
 

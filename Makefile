@@ -1,6 +1,6 @@
 PROJECT_NAME:=multibot
 GO_GET:=go get
-PLUGINS:=reminder filer
+PLUGINS:=log_messages save_messages filer
 
 all: multibot subdirs
 

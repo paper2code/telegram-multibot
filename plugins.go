@@ -28,8 +28,8 @@ var (
 	botPluginsByCommand map[string]*BotPlugin
 )
 
-// LoadPlugins load all plugins from directory
-func LoadPlugins() (err error) {
+// loadPlugins load all plugins from directory
+func loadPlugins() (err error) {
 	var pluginFiles []os.FileInfo
 	botPlugins = make(map[string]*BotPlugin)
 	botPluginsByCommand = make(map[string]*BotPlugin)

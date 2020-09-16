@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/go-pg/pg"
+	"gorm.io/gorm"
 
 	"github.com/paper2code/golang-telegram-multibot/v2/context"
 )
@@ -108,7 +108,7 @@ func (rus *ReminderUserState) Save() (err error) {
 	}
 
 	rus.Timestamp = time.Now()
-	if err = db.Select(temp); err != nil && err != pg.ErrNoRows {
+	if err = db.Find(temp).; err != nil && err != pg.ErrNoRows {
 		return
 	} else if err == pg.ErrNoRows || temp == nil {
 		return db.Insert(rus)
@@ -119,7 +119,7 @@ func (rus *ReminderUserState) Save() (err error) {
 // getReminderUserState function return user state from database
 func getReminderUserState(chatID int64, cmd string) (rus *ReminderUserState, err error) {
 	rus = initReminderUserState(chatID, cmd)
-	if err = ctx.GetDB().Select(rus); err != nil && err == pg.ErrNoRows {
+	if err = ctx.GetDB().Find(rus); err != nil {
 		return nil, nil
 	} else if err != nil {
 		return
