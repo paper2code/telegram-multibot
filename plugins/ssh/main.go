@@ -1,15 +1,17 @@
 package main
 
-import "github.com/paper2code/golang-telegram-multibot/v2/context"
+import (
+	"github.com/paper2code/golang-telegram-multibot/v2/context"
+)
 
 const (
 	commandsAddCommand  = "ssh_commands_add"
 	commandsDelCommand  = "ssh_commands_del"
 	commandsListCommand = "ssh_commands_list"
 
-	commandsAddKeyboard  = "Добавить SSH команду"
-	commandsDelKeyboard  = "Удалить SSH команду"
-	commandsListKeyboard = "Список SSH команд"
+	commandsAddKeyboard  = "Add SSH command"
+	commandsDelKeyboard  = "Remove SSH command"
+	commandsListKeyboard = "List of SSH Commands"
 )
 
 var (
@@ -18,7 +20,6 @@ var (
 
 func InitPlugin(mbc *context.MultiBotContext) (err error) {
 	ctx = mbc
-
 	if err = ctx.DBCreateTable(&UserCommand{}); err != nil {
 		ctx.Log().Errorf("Unable to create table for ssh user commands: %s", err)
 		return

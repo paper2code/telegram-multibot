@@ -80,9 +80,9 @@ func RunCommand(command string, update tgbotapi.Update) (err error) {
 
 // StartCommand handler start if bot get one command 'start'
 func StartCommand(update tgbotapi.Update) (err error) {
-	msg := fmt.Sprintf(`Тебя приветствует плагин "Файлер"
-Отправь боту файл, в ответ получишь секретное слово, запиши его и передай тому, кому адресован файл, по этому секретному слову файл можно будет получить.
-Приятного пользования "Файлером"!`)
+	msg := fmt.Sprintf(`Welcome to the plugin "Filer"
+Send the file to the bot, you will receive a secret word in response, write it down and transfer it to the person to whom the file is addressed, for this secret word the file can be obtained.
+Enjoy using the "File"!`)
 	ctx.SendMessageMarkdown(update.Message.Chat.ID, msg, 0, nil)
 	return
 }

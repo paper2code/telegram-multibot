@@ -13,8 +13,8 @@ var ctx *context.MultiBotContext
 
 type Log struct {
 	Timestamp time.Time
-	Message   *tgbotapi.Message
 	Text      string
+	*tgbotapi.Message
 }
 
 // InitPlugin initialize plugin if it needed
@@ -43,11 +43,7 @@ func GetCommands() []string {
 // UpdateHandler function call for each update
 func UpdateHandler(update tgbotapi.Update) (err error) {
 	log.Debugf("%s", update.Message.Text)
-	l := Log{
-		Timestamp: time.Now(),
-		Message:   update.Message,
-		Text:      update.Message.Text,
-	}
+	l := Log{time.Now(), update.Message.Text, update.Message}
 	err = ctx.GetDB().Save(&l).Error
 	return
 }

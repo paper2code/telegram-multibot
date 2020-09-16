@@ -1,5 +1,3 @@
-// -*- Go -*-
-
 package main
 
 import (
@@ -61,7 +59,7 @@ func botCommandsHandler(update tgbotapi.Update) {
 }
 
 func botStartHandler(update tgbotapi.Update) {
-	botContext.SendMessageMarkdown(update.Message.Chat.ID, "*Привет!*", 0, nil)
+	botContext.SendMessageMarkdown(update.Message.Chat.ID, "*Hi!*", 0, nil)
 	for name, botPlugin := range botPlugins {
 		if err := botPlugin.StartCommandHandler(update); err != nil {
 			log.Errorf("Unable to run command start for plugin '%s': %s", name, err)

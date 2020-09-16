@@ -1,5 +1,3 @@
-// -*- Go -*-
-
 package main
 
 import "time"
@@ -12,7 +10,7 @@ const (
 	PeriodDaily
 )
 
-var remindPeriods []string = []string{"Единожды", "Ежегодно", "Ежемесячно", "Еженедельно", "Ежедневно"}
+var remindPeriods []string = []string{"Once", "Annually", "Monthly", "Weekly", "Daily"}
 
 // Remind is a remind struct
 type Remind struct {
