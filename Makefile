@@ -1,22 +1,22 @@
-PROJECT_NAME:=multibot
-GO_GET:=go get
+# General
+PROJECT_NAME:=tg-multibot
 PLUGINS:=log_messages save_messages filer
 
 all: multibot subdirs
 
 multibot:
 	@echo "Building ${PROJECT_NAME}"
-	@go build
+	@go build -o ./bin/${PROJECT_NAME} ./cmd/${PROJECT_NAME}
 
-subdirs: bin_plugins $(PLUGINS)
+subdirs: plugins $(PLUGINS)
 
 $(PLUGINS):
 	@$(MAKE) -C plugins/$@
 	@$(MAKE) -C plugins/$@ install
 
-bin_plugins:
-	@install -m 0755 -d bin_plugins
+plugins:
+	@install -m 0755 -d ./shared/plugins
 
 clean:
-	@rm -rf bin_plugins
-	@rm -rf ${PROJECT_NAME}
+	@rm -rf plugins
+	@rm -rf bin/${PROJECT_NAME}

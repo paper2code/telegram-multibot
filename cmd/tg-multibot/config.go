@@ -4,17 +4,19 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 
-	"github.com/paper2code/golang-telegram-multibot/v2/context"
+	"github.com/paper2code/golang-telegram-multibot/v2/pkg/context"
 )
 
-var options *context.Options
+// var options *context.Options
 
 // LoadConfig function loads configuration file and set options
-func LoadConfig() (err error) {
+func LoadConfig(configName string) (options *context.Options, err error) {
 	log.Warnf("Load configuration file...")
 
 	viper.SetConfigName(configName)
 	viper.AddConfigPath(".")
+	viper.AddConfigPath("../..")
+	viper.AddConfigPath("../../shared/config")
 	viper.AddConfigPath("/etc")
 	viper.AddConfigPath("/usr/local/etc")
 
@@ -49,7 +51,6 @@ func loadPLuginConfig(pluginName string) {
 		log.Debugf("No settings for plugin \"%s\"", pluginName)
 		return
 	}
-
 	tempMap := make(map[string]interface{})
 	for _, key := range sub.AllKeys() {
 		tempMap[key] = sub.Get(key)
@@ -57,3 +58,5 @@ func loadPLuginConfig(pluginName string) {
 	options.PluginsSettings[pluginName] = tempMap
 	log.Debugf("Settings for plugin \"%s\" loaded successful", pluginName)
 }
+
+// write config

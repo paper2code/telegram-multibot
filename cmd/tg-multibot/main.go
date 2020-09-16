@@ -6,14 +6,17 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/telegram-bot-api.v4"
+	"gorm.io/gorm"
 
-	"github.com/paper2code/golang-telegram-multibot/v2/context"
+	"github.com/paper2code/golang-telegram-multibot/v2/pkg/context"
 )
 
 var (
 	configName string
 	wg         sync.WaitGroup
 	botContext *context.MultiBotContext
+	db         *gorm.DB
+	options    *context.Options
 )
 
 func init() {
@@ -24,7 +27,7 @@ func main() {
 	var err error
 	flag.Parse()
 
-	if err = LoadConfig(); err != nil {
+	if options, err = LoadConfig(configName); err != nil {
 		log.Fatalf("Unable to load configuration file %s: %s", configName, err)
 	}
 	if level, err := log.ParseLevel(options.LogLevel); err != nil {
@@ -34,7 +37,7 @@ func main() {
 		log.SetLevel(level)
 	}
 
-	if err = initDatabase(); err != nil {
+	if db, err = InitDatabase(); err != nil {
 		log.Fatalf("Unable to connect to database: %s", err)
 	}
 
@@ -44,7 +47,7 @@ func main() {
 	log.Debug("Telegram bot initialized sucessful")
 	botContext = context.InitContext(db, bot, options, log.StandardLogger())
 
-	if err = loadPlugins(); err != nil {
+	if err = LoadPlugins(); err != nil {
 		log.Fatalf("Unable to load plugins: %s", err)
 	}
 

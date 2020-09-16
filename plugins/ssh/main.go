@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/paper2code/golang-telegram-multibot/v2/context"
+	"github.com/paper2code/golang-telegram-multibot/v2/pkg/context"
 )
 
 const (

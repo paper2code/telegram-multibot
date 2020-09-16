@@ -10,7 +10,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/telegram-bot-api.v4"
 
-	"github.com/paper2code/golang-telegram-multibot/v2/context"
+	"github.com/paper2code/golang-telegram-multibot/v2/pkg/context"
 )
 
 // BotPlugin struct for store one plugin
@@ -28,8 +28,8 @@ var (
 	botPluginsByCommand map[string]*BotPlugin
 )
 
-// loadPlugins load all plugins from directory
-func loadPlugins() (err error) {
+// LoadPlugins load all plugins from directory
+func LoadPlugins() (err error) {
 	var pluginFiles []os.FileInfo
 	botPlugins = make(map[string]*BotPlugin)
 	botPluginsByCommand = make(map[string]*BotPlugin)

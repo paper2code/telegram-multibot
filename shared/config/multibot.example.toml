@@ -1,11 +1,11 @@
 [main]
   api_key = ""
-  plugin_dir = "./shared/plugins"
+  plugin_dir = "../../shared/plugins"
   debug = true
 
 [db]
   driver = "sqlite3"
-  name = "./shared/data/paper2code.db"
+  name = "../../shared/data/multibot.db"
   user = ""
   password = ""
   host = ""

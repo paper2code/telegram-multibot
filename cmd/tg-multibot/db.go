@@ -11,12 +11,8 @@ import (
 	"gorm.io/gorm"
 )
 
-var (
-	db *gorm.DB
-)
-
 // initDatabase function for initialize database
-func initDatabase() (err error) {
+func InitDatabase() (db *gorm.DB, err error) {
 	if options.DBDriver == "mysql" {
 		dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?parseTime=True&loc=Local", options.DBUser, options.DBPassword, options.DBHost, options.DBPort, options.DBName)
 		db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
@@ -27,7 +23,7 @@ func initDatabase() (err error) {
 	} else if options.DBDriver == "sqlite" || options.DBDriver == "sqlite3" {
 		db, err = gorm.Open(sqlite.Open(options.DBName), &gorm.Config{})
 	} else {
-		return errors.New("not supported database adapter")
+		return nil, errors.New("not supported database adapter")
 	}
 	return
 }
