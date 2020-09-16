@@ -7,3 +7,4 @@ Gopkg.lock
 vendor
 golang-telegram-multibot
 *.db
+.DS_Store
