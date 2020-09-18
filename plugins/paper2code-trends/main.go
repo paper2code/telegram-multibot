@@ -29,6 +29,11 @@ func GetCommands() []string {
 	return []string{}
 }
 
+// GetKeyboard return plugin keyboard buttons for bot
+func GetKeyboard() *tgbotapi.ReplyKeyboardMarkup {
+	return nil
+}
+
 // UpdateHandler function call for each update
 func UpdateHandler(update tgbotapi.Update) (err error) {
 	return nil

@@ -38,6 +38,11 @@ func GetCommands() []string {
 	}
 }
 
+// GetKeyboard return plugin keyboard buttons for bot
+func GetKeyboard() *tgbotapi.ReplyKeyboardMarkup {
+	return nil
+}
+
 // UpdateHandler function call for each update
 func UpdateHandler(update tgbotapi.Update) (err error) {
 	if f, err = os.OpenFile("multibot.txt", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644); err != nil {

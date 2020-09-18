@@ -43,3 +43,8 @@ func GetCommands() []string {
 		commandsListCommand,
 	}
 }
+
+// GetKeyboard return plugin keyboard buttons for bot
+func GetKeyboard() *tgbotapi.ReplyKeyboardMarkup {
+	return nil
+}

@@ -63,6 +63,7 @@ func LoadPlugins() (err error) {
 			getName             plugin.Symbol
 			getDescription      plugin.Symbol
 			getCommands         plugin.Symbol
+			getKeyboard         plugin.Symbol
 			updateHandler       plugin.Symbol
 			runCommandHandler   plugin.Symbol
 			startCommandHandler plugin.Symbol
@@ -82,6 +83,9 @@ func LoadPlugins() (err error) {
 		if getCommands, err = p.Lookup("GetCommands"); err != nil {
 			return
 		}
+		if getKeyboard, err = p.Lookup("GetKeyboard"); err != nil {
+			return
+		}
 		if updateHandler, err = p.Lookup("UpdateHandler"); err != nil {
 			return
 		}
@@ -96,6 +100,7 @@ func LoadPlugins() (err error) {
 			Name:                getName.(func() string)(),
 			Description:         getDescription.(func() string)(),
 			Commands:            getCommands.(func() []string)(),
+			Keyboard:            getKeyboard.(func() *tgbotapi.ReplyKeyboardMarkup)(),
 			EachUpdateHandler:   updateHandler.(func(tgbotapi.Update) error),
 			RunCommandHandler:   runCommandHandler.(func(string, tgbotapi.Update) error),
 			StartCommandHandler: startCommandHandler.(func(tgbotapi.Update) error),
