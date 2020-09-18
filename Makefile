@@ -1,6 +1,6 @@
 # General
 PROJECT_NAME:=tg-multibot
-PLUGINS:=log_messages save_messages filer
+PLUGINS:=core-log_messages core-save_messages core-filer core-ssh paper2code-mashup paper2code-search paper2code-trends 
 
 all: multibot subdirs
 

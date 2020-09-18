@@ -28,41 +28,41 @@ const (
 )
 
 const (
-	taskTypeOnce    = "Одиночная"
-	taskTypeYearly  = "Ежегодная"
-	taskTypeMonthly = "Ежемесячная"
-	taskTypeWeekly  = "Еженедельная"
-	taskTypeDaily   = "Ежедневная"
-	taskTypeHourly  = "Ежечасная"
+	taskTypeOnce    = "Once"
+	taskTypeYearly  = "Yearly"
+	taskTypeMonthly = "Monthly"
+	taskTypeWeekly  = "Weekly"
+	taskTypeDaily   = "Dialy"
+	taskTypeHourly  = "Hourly"
 )
 
 const (
-	weekDayMonday    = "Понедельник"
-	weekDayTuesday   = "Вторник"
-	weekDayWednesday = "Среда"
-	weekDayThursday  = "Четверг"
-	weekDayFriday    = "Пятница"
-	weekDaySaturday  = "Суббота"
-	weekDaySunday    = "Воскресенье"
+	weekDayMonday    = "Monday"
+	weekDayTuesday   = "Tuesday"
+	weekDayWednesday = "Wednesday"
+	weekDayThursday  = "Thursday"
+	weekDayFriday    = "Friday"
+	weekDaySaturday  = "Saturday"
+	weekDaySunday    = "Sunday"
 )
 
 const (
-	monthJan = "Январь"
-	monthFeb = "Февраль"
-	monthMar = "Март"
-	monthApr = "Апрель"
-	monthMay = "Май"
-	monthJun = "Июнь"
-	monthJul = "Июль"
-	monthAug = "Август"
-	monthSep = "Сентябрь"
-	monthOct = "Октябрь"
-	monthNov = "Ноябрь"
-	monthDec = "Декабрь"
+	monthJan = "Januray"
+	monthFeb = "February"
+	monthMar = "March"
+	monthApr = "April"
+	monthMay = "May"
+	monthJun = "June"
+	monthJul = "July"
+	monthAug = "August"
+	monthSep = "September"
+	monthOct = "October"
+	monthNov = "November"
+	monthDec = "December"
 )
 
 const (
-	globalCancel = "Отмена"
+	globalCancel = "Cancel"
 )
 
 var (

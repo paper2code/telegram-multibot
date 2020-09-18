@@ -1,4 +1,4 @@
-module github.com/paper2code/golang-telegram-multibot/v2/contrib/save_messages
+module github.com/paper2code/golang-telegram-multibot/v2/contrib/core-save_messages
 
 replace github.com/paper2code/golang-telegram-multibot/v2 => ../..
 

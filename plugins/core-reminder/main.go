@@ -106,11 +106,11 @@ func RunCommand(command string, update tgbotapi.Update) (err error) {
 // StartCommand handler start if bot get one command 'start'
 func StartCommand(update tgbotapi.Update) (err error) {
 	pluginName := GetName()
-	msg := fmt.Sprintf(`Тебя приветствует плагин "Напоминатель"
-Для добавления задачи отправь команду /%s_%s.
-Для удаления уже созданной задачи отправь команду /%s_%s.
-Для вывода списка задач отправь команду /%s_%s.
-Приятного пользования "Напоминателем"!`, pluginName, taskAddCommand, pluginName, taskDelCommand, pluginName, taskListCommand)
+	msg := fmt.Sprintf(`Welcome to the plugin "Reminder"
+To add a task, send the command/%s_%s.
+To delete an already created task, send the command /%s_%s.
+To display a list of tasks, send the command /%s_%s.
+Enjoy using the Reminder!`, pluginName, taskAddCommand, pluginName, taskDelCommand, pluginName, taskListCommand)
 	sendWelcome(update.Message.Chat.ID, msg)
 	return
 }
@@ -131,7 +131,7 @@ func sendWelcome(chatID int64, msg string) {
 }
 
 func sendError(chatID int64) {
-	sendWelcome(chatID, "Ой, что-то пошло не так.")
+	sendWelcome(chatID, "Oh, something went wrong.")
 }
 
 func addTask(msg *tgbotapi.Message) {
@@ -155,23 +155,23 @@ func addTask(msg *tgbotapi.Message) {
 	case taskAddStateSelectType:
 		sendSelectType(msg)
 	case taskAddStateSelectYear:
-		sendSelectNum(msg, "Введите или выберите год:", time.Now().Year(), time.Now().Year()+3, 1)
+		sendSelectNum(msg, "Enter or select a year:", time.Now().Year(), time.Now().Year()+3, 1)
 	case taskAddStateSelectMonth:
-		sendSelectStringSlice(msg, "Выберите месяц или введите номер месяца:", months)
+		sendSelectStringSlice(msg, "Select the month or enter the month number:", months)
 	case taskAddStateSelectDay:
-		sendSelectNum(msg, "Введите или выберите день:", 1, rus.GetLastDay(), 1)
+		sendSelectNum(msg, "Enter or select a day:", 1, rus.GetLastDay(), 1)
 	case taskAddStateSelectHour:
-		sendSelectNum(msg, "Введите или выберите час:", 0, 23, 1)
+		sendSelectNum(msg, "Enter or select an hour:", 0, 23, 1)
 	case taskAddStateSelectMinute:
-		sendSelectNum(msg, "Введите или выберите минуту:", 0, 59, 5)
+		sendSelectNum(msg, "Enter or select a minute:", 0, 59, 5)
 	case taskAddStateSelectSecond:
-		sendSelectNum(msg, "Введите или выберите секунду:", 0, 59, 30)
+		sendSelectNum(msg, "Enter or select a second:", 0, 59, 30)
 	case taskAddStateSelectWeekDay:
-		sendSelectStringSlice(msg, "Выберите месяц или введите номер месяца:", weekDays)
+		sendSelectStringSlice(msg, "Select the month or enter the month number:", weekDays)
 	case taskAddStateSelectName:
-		ctx.SendMessageText(msg.Chat.ID, "Введите название задачи:", 0, tgbotapi.NewRemoveKeyboard(true))
+		ctx.SendMessageText(msg.Chat.ID, "Enter task name:", 0, tgbotapi.NewRemoveKeyboard(true))
 	case taskAddStateSelectFinish:
-		ctx.SendMessageText(msg.Chat.ID, "Введите текст задачи:", 0, tgbotapi.NewRemoveKeyboard(true))
+		ctx.SendMessageText(msg.Chat.ID, "Enter the task text:", 0, tgbotapi.NewRemoveKeyboard(true))
 	}
 }
 
@@ -195,9 +195,9 @@ func delTask(msg *tgbotapi.Message) {
 
 	switch rus.State {
 	case taskDelStateSelectTask:
-		sendSelectTasks(msg, "Выберите задачу для удаления:")
+		sendSelectTasks(msg, "Select a task to delete:")
 	case taskDelStateFinish:
-		sendWelcome(msg.Chat.ID, "Задача успешно удалена.")
+		sendWelcome(msg.Chat.ID, "The task was successfully deleted.")
 	}
 }
 
@@ -244,7 +244,7 @@ func sendSelectType(msg *tgbotapi.Message) {
 	rows = append(rows, []tgbotapi.KeyboardButton{tgbotapi.NewKeyboardButton(globalCancel)})
 
 	rm := tgbotapi.NewReplyKeyboard(rows...)
-	ctx.SendMessageText(msg.Chat.ID, "Выберите тип задачи", 0, rm)
+	ctx.SendMessageText(msg.Chat.ID, "Select task type", 0, rm)
 }
 
 func sendSelectNum(msg *tgbotapi.Message, query string, begin, end, step int) {
@@ -309,7 +309,7 @@ func sendSelectTasks(msg *tgbotapi.Message, query string) {
 		return
 	}
 	if len(tasks) == 0 {
-		sendWelcome(msg.Chat.ID, "У вас еще нет задач. Попробуйте, сперва создать их.")
+		sendWelcome(msg.Chat.ID, "You don't have any tasks yet. Try to create them first.")
 		return
 	}
 	var strTasks []string
@@ -505,7 +505,7 @@ func getReminderTextNum(num int, rus *ReminderUserState, msg *tgbotapi.Message) 
 		}
 	}
 	if !valid {
-		ctx.SendMessageMarkdown(msg.Chat.ID, "Введено неправильное значение", 0, nil)
+		ctx.SendMessageMarkdown(msg.Chat.ID, "Invalid value entered", 0, nil)
 		addTask(msg)
 		return
 	}

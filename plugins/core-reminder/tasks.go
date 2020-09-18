@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/go-pg/pg"
+	// "github.com/go-pg/pg"
+	"gorm.io/gorm"
 )
 
 // UserTask struct for store user tasks
@@ -31,7 +32,7 @@ func (ut *UserTask) Save() (err error) {
 	}
 	setTimerAndRunJob(*ut)
 
-	if err = db.Select(temp); err != nil && err != pg.ErrNoRows {
+	if err = db.First(temp).Error; err != nil && err != pg.ErrNoRows {
 		return
 	} else if err == pg.ErrNoRows || temp == nil {
 		return db.Insert(ut)

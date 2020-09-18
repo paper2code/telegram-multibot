@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"plugin"
+	"strings"
 
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/telegram-bot-api.v4"
@@ -35,6 +36,11 @@ func LoadPlugins() (err error) {
 	botPluginsByCommand = make(map[string]*BotPlugin)
 
 	log.Debugf("Try to load plugins from: %s", options.PluginDir)
+
+	// pluginFiles, err := filepath.Glob(fmt.Sprintf("%s/*.so", options.PluginDir))
+	// if err != nil {
+	// 	return
+	// }
 	if pluginFiles, err = ioutil.ReadDir(options.PluginDir); err != nil {
 		return
 	}
@@ -42,6 +48,10 @@ func LoadPlugins() (err error) {
 	for _, pluginFile := range pluginFiles {
 		if pluginFile.IsDir() {
 			log.Debugf("pluginFile.IsDir: %s", pluginFile.Name())
+			continue
+		}
+		if !strings.HasSuffix(pluginFile.Name(), ".so") {
+			log.Debugf("pluginFile.IsNotPlugin: %s", pluginFile.Name())
 			continue
 		}
 		log.Debugf("Try to load plugin: %s", pluginFile.Name())
