@@ -7,4 +7,5 @@ type Plugin interface {
 	GetDescription() string
 	GetCommands() []string
 	UpdateHandler(update tgbotapi.Update) error
-}*/
+}
+*/
