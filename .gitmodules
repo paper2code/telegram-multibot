@@ -4,3 +4,6 @@
 [submodule ".docker/haystack"]
 	path = .docker/haystack
 	url = https://github.com/deepset-ai/haystack
+[submodule ".docker/searx"]
+	path = .docker/searx
+	url = https://github.com/asciimoo/searx
