@@ -28,6 +28,8 @@ var homeReplyKeyboard = tgbotapi.NewReplyKeyboard(
 	),
 )
 
+// homeReplyKeyboard.OneTimeKeyboard = true
+
 // BotServe function run telegram bot listener
 func BotServe() (err error) {
 
