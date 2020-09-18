@@ -19,6 +19,7 @@ type BotPlugin struct {
 	Name                string
 	Description         string
 	Commands            []string
+	Keyboard            *tgbotapi.ReplyKeyboardMarkup
 	EachUpdateHandler   func(tgbotapi.Update) error
 	RunCommandHandler   func(string, tgbotapi.Update) error
 	StartCommandHandler func(tgbotapi.Update) error
