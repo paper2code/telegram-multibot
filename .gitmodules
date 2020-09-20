@@ -59,9 +59,6 @@
 [submodule ".docker/tg-qa-arxiv"]
 	path = .docker/tg-qa-arxiv
 	url = https://github.com/paper2code/telegram-qa-with-arxiv-papers
-[submodule ".docker/askit"]
-	path = .docker/askit
-	url = https://github.com/paper2code/AskIt
 [submodule ".docker/milvus-bootcamp"]
 	path = .docker/milvus-bootcamp
 	url = https://github.com/paper2code/milvus-bootcamp
