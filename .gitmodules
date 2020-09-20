@@ -41,3 +41,15 @@
 [submodule ".docker/telegram-qa-with-arxiv-papers"]
 	path = .docker/telegram-qa-with-arxiv-papers
 	url = https://github.com/paper2code/telegram-qa-with-arxiv-papers
+[submodule ".docker/emogram"]
+	path = .docker/emogram
+	url = https://github.com/paper2code/Emogram
+[submodule ".docker/linkedinfo-ml"]
+	path = .docker/linkedinfo-ml
+	url = https://github.com/paper2code/linkedinfo-ml
+[submodule ".docker/paper-qa-bert-api"]
+	path = .docker/paper-qa-bert-api
+	url = https://github.com/paper2code/paper-qa-bert-api
+[submodule ".docker/cdqa-odqa"]
+	path = .docker/cdqa-odqa
+	url = https://github.com/paper2code/Question-answering
