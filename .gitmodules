@@ -16,3 +16,13 @@
 [submodule ".docker/msgflow"]
 	path = .docker/msgflow
 	url = https://github.com/paper2code/msgflow
+[submodule ".docker/rss-briefing"]
+	path = .docker/rss-briefing
+	url = https://github.com/x0rzkov/rssBriefing
+	branch = update_docker_gpu
+[submodule ".docker/semantic-sh"]
+	path = .docker/semantic-sh
+	url = https://github.com/paper2code/semantic-sh
+[submodule ".docker/searx-redis"]
+	path = .docker/searx-redis
+	url = https://gitlab.e.foundation/e/cloud/my-spot.git
