@@ -38,3 +38,6 @@
 [submodule ".docker/olivia-ai"]
 	path = .docker/olivia-ai
 	url = https://github.com/paper2code/olivia
+[submodule ".docker/telegram-qa-with-arxiv-papers"]
+	path = .docker/telegram-qa-with-arxiv-papers
+	url = https://github.com/paper2code/telegram-qa-with-arxiv-papers
