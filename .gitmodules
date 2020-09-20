@@ -7,3 +7,6 @@
 [submodule ".docker/searx"]
 	path = .docker/searx
 	url = https://github.com/asciimoo/searx
+[submodule ".docker/AskIt"]
+	path = .docker/AskIt
+	url = https://github.com/cerebroai/AskIt
