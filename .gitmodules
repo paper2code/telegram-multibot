@@ -38,9 +38,6 @@
 [submodule ".docker/olivia-ai"]
 	path = .docker/olivia-ai
 	url = https://github.com/paper2code/olivia
-[submodule ".docker/telegram-qa-with-arxiv-papers"]
-	path = .docker/telegram-qa-with-arxiv-papers
-	url = https://github.com/paper2code/telegram-qa-with-arxiv-papers
 [submodule ".docker/emogram"]
 	path = .docker/emogram
 	url = https://github.com/paper2code/Emogram
@@ -53,3 +50,15 @@
 [submodule ".docker/cdqa-odqa"]
 	path = .docker/cdqa-odqa
 	url = https://github.com/paper2code/Question-answering
+[submodule ".docker/rasa-diagrams2ai"]
+	path = .docker/rasa-diagrams2ai
+	url = https://github.com/paper2code/diagrams2ai
+[submodule ".docker/rasa"]
+	path = .docker/rasa
+	url = https://github.com/paper2code/rasa
+[submodule ".docker/rasa-demo"]
+	path = .docker/rasa-demo
+	url = https://github.com/paper2code/rasa-demo
+[submodule ".docker/tg-qa-arxiv"]
+	path = .docker/tg-qa-arxiv
+	url = https://github.com/paper2code/telegram-qa-with-arxiv-papers
