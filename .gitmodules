@@ -7,9 +7,6 @@
 [submodule ".docker/searx"]
 	path = .docker/searx
 	url = https://github.com/asciimoo/searx
-[submodule ".docker/AskIt"]
-	path = .docker/AskIt
-	url = https://github.com/cerebroai/AskIt
 [submodule ".docker/gptchat"]
 	path = .docker/gptchat
 	url = https://github.com/paper2code/gptchat
@@ -62,3 +59,15 @@
 [submodule ".docker/tg-qa-arxiv"]
 	path = .docker/tg-qa-arxiv
 	url = https://github.com/paper2code/telegram-qa-with-arxiv-papers
+[submodule ".docker/askit"]
+	path = .docker/askit
+	url = https://github.com/paper2code/AskIt
+[submodule ".docker/milvus-bootcamp"]
+	path = .docker/milvus-bootcamp
+	url = https://github.com/paper2code/milvus-bootcamp
+[submodule ".docker/milvus"]
+	path = .docker/milvus
+	url = https://github.com/paper2code/milvus
+[submodule ".docker/searx-telegram"]
+	path = .docker/searx-telegram
+	url = https://github.com/paper2code/searx_bot
