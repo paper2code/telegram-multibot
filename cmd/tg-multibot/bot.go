@@ -10,24 +10,9 @@ import (
 	"github.com/paper2code/golang-telegram-multibot/v2/pkg/models"
 )
 
-var bot *tgbotapi.BotAPI
-
-var homeReplyKeyboard = tgbotapi.NewReplyKeyboard(
-	tgbotapi.NewKeyboardButtonRow(
-		tgbotapi.NewKeyboardButton("Search Paper2code"),
-	),
-	tgbotapi.NewKeyboardButtonRow(
-		tgbotapi.NewKeyboardButton("Latest Trends"),
-		tgbotapi.NewKeyboardButton("Latest Mashup"),
-	),
-	tgbotapi.NewKeyboardButtonRow(
-		tgbotapi.NewKeyboardButton("Semantic Segementation"),
-		tgbotapi.NewKeyboardButton("Summarize a text"),
-		tgbotapi.NewKeyboardButton("Classifiy a text/url"),
-	),
+var (
+	bot *tgbotapi.BotAPI
 )
-
-// homeReplyKeyboard.OneTimeKeyboard = true
 
 // BotServe function run telegram bot listener
 func BotServe() (err error) {
@@ -109,10 +94,9 @@ func startCommand(update tgbotapi.Update) {
 			Duration: 1,
 			Content:  "How can I help you?",
 			MsgType:  "Message",
-			Keyboard: &homeReplyKeyboard,
+			Keyboard: pluginReplyKeyboard,
 		},
 	}
-
 	for _, story := range stories {
 		models.ConsumeChainMessage(bot, story)
 	}
@@ -154,7 +138,7 @@ func backCommand(update tgbotapi.Update) {
 			Duration: 2,
 			Content:  "What are you interested in?",
 			MsgType:  "Message",
-			Keyboard: &homeReplyKeyboard,
+			Keyboard: pluginReplyKeyboard,
 		},
 	}
 	for _, story := range stories {

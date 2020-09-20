@@ -28,6 +28,7 @@ type BotPlugin struct {
 var (
 	botPlugins          map[string]*BotPlugin
 	botPluginsByCommand map[string]*BotPlugin
+	pluginReplyKeyboard *tgbotapi.ReplyKeyboardMarkup
 )
 
 // LoadPlugins load all plugins from directory
@@ -46,6 +47,21 @@ func LoadPlugins() (err error) {
 		return
 	}
 
+	intPlugins := 0
+	for _, pluginFile := range pluginFiles {
+		if pluginFile.IsDir() {
+			log.Debugf("pluginFile.IsDir: %s", pluginFile.Name())
+			continue
+		}
+		if !strings.HasSuffix(pluginFile.Name(), ".so") {
+			log.Debugf("pluginFile.IsNotPlugin: %s", pluginFile.Name())
+			continue
+		}
+		intPlugins++
+	}
+
+	buttons := make([][]tgbotapi.KeyboardButton, intPlugins)
+	count := 0
 	for _, pluginFile := range pluginFiles {
 		if pluginFile.IsDir() {
 			log.Debugf("pluginFile.IsDir: %s", pluginFile.Name())
@@ -111,6 +127,9 @@ func LoadPlugins() (err error) {
 		}
 		botPlugins[botPlugin.Name] = botPlugin
 
+		botPluginsByCommand[botPlugin.Name] = botPlugin
+		log.Debugf("Set command \"%s\" for plugin \"%s\"", botPlugin.Name, botPlugin.Name)
+
 		for _, cmd := range botPlugin.Commands {
 			rcmd := fmt.Sprintf("%s_%s", botPlugin.Name, cmd)
 			if pl, ok := botPluginsByCommand[rcmd]; ok {
@@ -119,6 +138,10 @@ func LoadPlugins() (err error) {
 			botPluginsByCommand[rcmd] = botPlugin
 			log.Debugf("Set command \"%s\" for plugin \"%s\"", rcmd, botPlugin.Name)
 		}
+
+		button := tgbotapi.NewKeyboardButton(botPlugin.Name)
+		buttons[count%3] = append(buttons[count%3], button)
+		count++
 
 		// try to get plugins settings
 		loadPLuginConfig(botPlugin.Name)
@@ -129,5 +152,10 @@ func LoadPlugins() (err error) {
 		log.Debugf("Loaded plugin: %s (%s)", botPlugin.Name, botPlugin.Description)
 	}
 
+	prk := tgbotapi.NewReplyKeyboard(buttons...)
+	prk.OneTimeKeyboard = true
+	prk.Selective = true
+	prk.ResizeKeyboard = true
+	pluginReplyKeyboard = &prk
 	return
 }

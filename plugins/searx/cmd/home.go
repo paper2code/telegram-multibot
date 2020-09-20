@@ -8,5 +8,5 @@ import (
 
 func Home(chatID int64, ctx *context.MultiBotContext, input string, rkm *tgbotapi.ReplyKeyboardMarkup) {
 	ctx.Log().Infof("input: %s", input)
-	ctx.SendMessageText(chatID, "Paper2code Home", 0, rkm)
+	ctx.SendMessageText(chatID, "Searx Home", 0, rkm)
 }

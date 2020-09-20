@@ -3,8 +3,6 @@ package main
 import (
 	"gopkg.in/telegram-bot-api.v4"
 
-	"github.com/flier/gohs/hyperscan"
-
 	"github.com/paper2code/golang-telegram-multibot/v2/pkg/context"
 )
 
@@ -18,12 +16,12 @@ func InitPlugin(mbc *context.MultiBotContext) error {
 
 // GetName function returns plugin name
 func GetName() string {
-	return "hyperscan"
+	return "bookmarks"
 }
 
 // GetDescription function returns plugin description
 func GetDescription() string {
-	return "Hyperscan module for parsing users' messages"
+	return "Bookmarks plugin helps to classify and save your interesting links"
 }
 
 // GetCommands return plugin commands for bot

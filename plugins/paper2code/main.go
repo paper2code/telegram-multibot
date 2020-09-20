@@ -15,6 +15,12 @@ var (
 	ctx     *context.MultiBotContext
 	options map[string]interface{}
 	cmdMap  = map[string]*models.Command{
+		"": &models.Command{
+			Func:        cmd.Home,
+			Name:        "",
+			Keyboard:    "Paper2code Home",
+			Description: "Paper2code Home",
+		},
 		"add": &models.Command{
 			Func:        cmd.Add,
 			Name:        "add",
@@ -113,7 +119,8 @@ func GetKeyboard() *tgbotapi.ReplyKeyboardMarkup {
 // UpdateHandler function call for each update
 func UpdateHandler(update tgbotapi.Update) (err error) {
 	for _, info := range cmdMap {
-		if update.Message.Text == info.Keyboard {
+		ctx.Log().Debugf("update.Message.Text: %s, info.Keyboard=%s", update.Message.Text, info.Keyboard)
+		if update.Message.Text == info.Keyboard || update.Message.Text == fmt.Sprintf("/%s", GetName()) {
 			info.Func.(func(int64, *context.MultiBotContext, string, *tgbotapi.ReplyKeyboardMarkup))(update.Message.Chat.ID, ctx, update.Message.Text, GetKeyboard())
 		}
 	}
@@ -123,6 +130,7 @@ func UpdateHandler(update tgbotapi.Update) (err error) {
 // RunCommand handler start if bot get one of commands
 func RunCommand(command string, update tgbotapi.Update) (err error) {
 	for cmd, info := range cmdMap {
+		ctx.Log().Debugf("cmd: %s, match=%s", cmd, fmt.Sprintf("/%s_%s", GetName()))
 		if update.Message.Text == fmt.Sprintf("/%s_%s", GetName(), cmd) {
 			info.Func.(func(int64, *context.MultiBotContext, string, *tgbotapi.ReplyKeyboardMarkup))(update.Message.Chat.ID, ctx, "", GetKeyboard())
 		}

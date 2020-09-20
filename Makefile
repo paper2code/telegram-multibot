@@ -142,8 +142,8 @@ plugins:
 	#GOARCH=amd64 PLUGIN=messages-save make plugin
 	#GOARCH=amd64 PLUGIN=reminder make plugin
 	#GOARCH=amd64 PLUGIN=filer make plugin
-	#GOARCH=amd64 PLUGIN=searx make plugin
 	#GOARCH=amd64 PLUGIN=ssh make plugin
 	#GOARCH=amd64 PLUGIN=hyperscan make plugin
+	GOARCH=amd64 PLUGIN=searx make plugin
 	GOARCH=amd64 PLUGIN=paper2code make plugin
 .PHONY: plugins

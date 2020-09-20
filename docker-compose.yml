@@ -1,0 +1,19 @@
+---
+version: '3.8'
+services:
+
+  multibot:
+    image: paper2code/telegram-multibot:latest
+    build:
+      context: .
+      dockerfile: dockerfile
+    command: ["tg-multibot"]
+
+  admin:
+    image: paper2code/telegram-multibot-admin:latest
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+    - 8087:8087
+    command: ["tg-admin"]
