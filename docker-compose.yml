@@ -4,14 +4,15 @@ services:
 
   multibot:
     image: paper2code/telegram-multibot:latest
+    container_name: ${NAMESPACE}-multibot
     build:
       context: .
       dockerfile: Dockerfile
     ports:
     - 8087:8087
     volumes:
-    - ./shared/config/multibot-docker.toml:/usr/bin/multibot.toml
-    - multibot-data:/usr/bin/shared/data
+    - ./shared/config/multibot-docker.toml:/usr/local/etc/multibot.toml
+    - multibot-data:/usr/local/shared/data
     - multibot-media:/usr/bin/shared/medias
     networks:
     - internal

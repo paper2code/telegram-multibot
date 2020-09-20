@@ -35,7 +35,7 @@ RUN go build -ldflags "-extldflags=-static -extldflags=-lm" -o /go/bin/tg-multib
 
 FROM alpine:3.12
 
-RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache ca-certificates libc6-compat libstdc++ bash
 
 COPY --from=build /go/bin/tg-multibot /usr/bin/tg-multibot
 COPY --from=build /go/src/github.com/paper2code/telegram-multibot/shared/plugins /usr/bin/shared/plugins
