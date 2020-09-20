@@ -71,3 +71,9 @@
 [submodule ".docker/searx-telegram-js"]
 	path = .docker/searx-telegram-js
 	url = https://github.com/paper2code/searxbot
+[submodule ".docker/investigo"]
+	path = .docker/investigo
+	url = https://github.com/paper2code/Investigo
+[submodule ".docker/manticore-docker"]
+	path = .docker/manticore-docker
+	url = https://github.com/paper2code/manticore-docker
