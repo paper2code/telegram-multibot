@@ -10,3 +10,9 @@
 [submodule ".docker/AskIt"]
 	path = .docker/AskIt
 	url = https://github.com/cerebroai/AskIt
+[submodule ".docker/gptchat"]
+	path = .docker/gptchat
+	url = https://github.com/paper2code/gptchat
+[submodule ".docker/msgflow"]
+	path = .docker/msgflow
+	url = https://github.com/paper2code/msgflow
