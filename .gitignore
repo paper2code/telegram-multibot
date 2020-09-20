@@ -1,4 +1,5 @@
 multibot.toml
+multibot-docker.toml
 *.swp
 bin_plugins
 *.so

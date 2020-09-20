@@ -9,6 +9,10 @@ services:
       dockerfile: Dockerfile
     ports:
     - 8087:8087
+    volumes:
+    - ./shared/config/multibot-docker.toml:/usr/bin/multibot.toml
+    - multibot-data:/usr/bin/shared/data
+    - multibot-media:/usr/bin/shared/medias
     networks:
     - internal
     - web
@@ -30,10 +34,29 @@ services:
     - internal
     - web
     environment:
-      MYSQL_MULTIPLE_DATABASES: paper2telegram
+      MYSQL_MULTIPLE_DATABASES: paper2telegram,paper2milvus
       MYSQL_PASSWORD: ${P2TG_MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${P2TG_MYSQL_ROOT_PASSWORD}
       MYSQL_USER: ${P2TG_MYSQL_USER}
+    restart: unless-stopped
+
+  elastic:
+    image: elasticsearch:7.6.2
+    container_name: ${NAMESPACE}-elasticsearch
+    networks:
+    - internal
+    environment:
+    - discovery.type=single-node
+    volumes:
+    - es-data:/usr/share/elasticsearch/data
+    ulimits:
+      nproc: 65535
+      nofile:
+         soft: 65535
+         hard: 65535
+      memlock:
+        soft: -1
+        hard: -1
     restart: unless-stopped
 
 networks:
@@ -43,4 +66,7 @@ networks:
     external: true
 
 volumes:
+  multibot-data:
+  multibot-media:
   db-data:
+  es-data:
