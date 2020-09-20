@@ -3,7 +3,7 @@
 	url = https://github.com/ncarlier/makefiles
 [submodule ".docker/haystack"]
 	path = .docker/haystack
-	url = https://github.com/deepset-ai/haystack
+	url = https://github.com/paper2code/haystack
 [submodule ".docker/searx"]
 	path = .docker/searx
 	url = https://github.com/asciimoo/searx
@@ -26,3 +26,15 @@
 [submodule ".docker/searx-redis"]
 	path = .docker/searx-redis
 	url = https://gitlab.e.foundation/e/cloud/my-spot.git
+[submodule ".docker/qa-ranksys"]
+	path = .docker/qa-ranksys
+	url = https://github.com/paper2code/Question-Answering-and-Ranking-System
+[submodule ".docker/deeppavlov-dream-demos"]
+	path = .docker/deeppavlov-dream-demos
+	url = https://github.com/paper2code/dp-dream-demos
+[submodule ".docker/spago"]
+	path = .docker/spago
+	url = https://github.com/paper2code/spago
+[submodule ".docker/olivia-ai"]
+	path = .docker/olivia-ai
+	url = https://github.com/paper2code/olivia
