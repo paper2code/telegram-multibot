@@ -8,6 +8,7 @@ import (
 	"plugin"
 	"strings"
 
+	"github.com/k0kubun/pp"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/telegram-bot-api.v4"
 
@@ -57,10 +58,13 @@ func LoadPlugins() (err error) {
 			log.Debugf("pluginFile.IsNotPlugin: %s", pluginFile.Name())
 			continue
 		}
+		log.Infof("pluginFile.IsPlugin: %s", pluginFile.Name())
 		intPlugins++
 	}
 
-	buttons := make([][]tgbotapi.KeyboardButton, intPlugins)
+	log.Infof("pluginFile.length: %d", intPlugins)
+
+	buttons := make([][]tgbotapi.KeyboardButton, 3)
 	count := 0
 	for _, pluginFile := range pluginFiles {
 		if pluginFile.IsDir() {
@@ -153,6 +157,9 @@ func LoadPlugins() (err error) {
 	}
 
 	prk := tgbotapi.NewReplyKeyboard(buttons...)
+
+	pp.Println("buttons", buttons)
+
 	prk.OneTimeKeyboard = true
 	prk.Selective = true
 	prk.ResizeKeyboard = true

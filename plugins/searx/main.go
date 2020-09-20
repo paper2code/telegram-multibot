@@ -95,7 +95,7 @@ func GetName() string {
 
 // GetDescription function returns plugin description
 func GetDescription() string {
-	return "Searx is a privacy-respecting, hackable metasearch engine"
+	return "Searx module, a privacy-respecting, hackable metasearch engine"
 }
 
 // GetCommands return plugin commands for bot

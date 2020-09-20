@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 
-	// "github.com/k0kubun/pp"
+	"github.com/k0kubun/pp"
+	"gopkg.in/telegram-bot-api.v4"
+
 	"github.com/paper2code/golang-telegram-multibot/v2/pkg/context"
 	"github.com/paper2code/golang-telegram-multibot/v2/pkg/models"
-	"gopkg.in/telegram-bot-api.v4"
 
 	"github.com/paper2code/golang-telegram-multibot/v2/plugins/paper2code/cmd"
 )
@@ -109,6 +110,7 @@ func GetKeyboard() *tgbotapi.ReplyKeyboardMarkup {
 			buttons[i] = nil
 		}
 	}
+	pp.Println("buttons", buttons)
 	rkm := tgbotapi.NewReplyKeyboard(buttons...)
 	rkm.OneTimeKeyboard = true
 	rkm.Selective = true

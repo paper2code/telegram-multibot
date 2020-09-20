@@ -2,6 +2,11 @@
 
 ## Golang
 
+### i18n
+- https://github.com/m1/go-localize
+- https://github.com/nicksnyder/go-i18n
+- https://github.com/unknwon/i18n
+
 ### Virtual Assistant
 - https://github.com/sespiros/go-telegram-garvis
 

@@ -6,6 +6,7 @@ require (
 	github.com/go-bindata/go-bindata v3.1.2+incompatible // indirect
 	github.com/go-pg/pg v8.0.7+incompatible
 	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/k0kubun/pp v3.0.1+incompatible // indirect
 	github.com/sirupsen/logrus v1.6.0
 	github.com/spf13/viper v1.7.1
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect

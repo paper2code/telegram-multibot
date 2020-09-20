@@ -12,8 +12,12 @@ APPNAME=telegram-multibot
 GOOS?=$(shell go env GOHOSTOS)
 GOARCH?=$(shell go env GOHOSTARCH)
 
-# Add exe extension if windows target
+# Check the local operatig system
 is_windows:=$(filter windows,$(GOOS))
+is_darwin:=$(filter darwin,$(GOOS))
+is_linux:=$(filter linux,$(GOOS))
+
+# Add exe extension if windows target
 EXT:=$(if $(is_windows),".exe","")
 LDLAGS_LAUNCHER:=$(if $(is_windows),-ldflags "-H=windowsgui",)
 
@@ -131,7 +135,7 @@ distribution:
 ## Bulid plugin (defined by PLUGIN variable)
 plugin:
 	-mkdir -p shared/plugins
-	if [ -d "plugins/$(PLUGIN)" ]; then cd plugins/$(PLUGIN) && go-bindata views/... ; fi 
+	-if [ -d "plugins/$(PLUGIN)" ]; then cd plugins/$(PLUGIN) && go-bindata views/... ; fi
 	echo ">>> Building: $(PLUGIN_SO) $(VERSION) for $(GOOS)-$(GOARCH) ..."
 	cd plugins/$(PLUGIN) && GOOS=$(GOOS) GOARCH=$(GOARCH) go build -buildmode=plugin -o ../../shared/plugins/$(PLUGIN_SO)
 .PHONY: plugin
@@ -143,7 +147,11 @@ plugins:
 	#GOARCH=amd64 PLUGIN=reminder make plugin
 	#GOARCH=amd64 PLUGIN=filer make plugin
 	#GOARCH=amd64 PLUGIN=ssh make plugin
-	#GOARCH=amd64 PLUGIN=hyperscan make plugin
+	#GOARCH=amd64 PLUGIN=chatbot-gtp2tf make plugin	
+	#GOARCH=amd64 PLUGIN=chatbot-deeppavlov make plugin
+	GOARCH=amd64 PLUGIN=haystack make plugin
+	GOARCH=amd64 PLUGIN=bookmarks make plugin
+	GOARCH=amd64 PLUGIN=hyperscan make plugin
 	GOARCH=amd64 PLUGIN=searx make plugin
 	GOARCH=amd64 PLUGIN=paper2code make plugin
 .PHONY: plugins
