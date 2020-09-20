@@ -92,7 +92,7 @@ func viewsStartTmpl() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "views/start.tmpl", size: 9, mode: os.FileMode(420), modTime: time.Unix(1600590685, 0)}
+	info := bindataFileInfo{name: "views/start.tmpl", size: 9, mode: os.FileMode(436), modTime: time.Unix(1600602611, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
