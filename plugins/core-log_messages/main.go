@@ -23,7 +23,6 @@ type Log struct {
 // InitPlugin initialize plugin if it needed
 func InitPlugin(mbc *context.MultiBotContext) (err error) {
 	ctx = mbc
-
 	err = ctx.DBCreateTable(&Log{})
 	return
 }

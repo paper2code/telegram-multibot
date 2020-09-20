@@ -16,9 +16,9 @@ const (
 	taskDelCommand  = "task_del"
 	taskListCommand = "tast_list"
 
-	taskAddKeyboard  = "Добавить задачу"
-	taskDelKeyboard  = "Удалить задачу"
-	taskListKeyboard = "Список задач"
+	taskAddKeyboard  = "Add task"
+	taskDelKeyboard  = "Delete task"
+	taskListKeyboard = "Task list"
 )
 
 var (
@@ -112,7 +112,7 @@ func RunCommand(command string, update tgbotapi.Update) (err error) {
 func StartCommand(update tgbotapi.Update) (err error) {
 	pluginName := GetName()
 	msg := fmt.Sprintf(`Welcome to the plugin "Reminder"
-To add a task, send the command/%s_%s.
+To add a task, send the command /%s_%s.
 To delete an already created task, send the command /%s_%s.
 To display a list of tasks, send the command /%s_%s.
 Enjoy using the Reminder!`, pluginName, taskAddCommand, pluginName, taskDelCommand, pluginName, taskListCommand)
@@ -121,7 +121,6 @@ Enjoy using the Reminder!`, pluginName, taskAddCommand, pluginName, taskDelComma
 }
 
 func sendWelcome(chatID int64, msg string) {
-
 	row := tgbotapi.NewKeyboardButtonRow(
 		tgbotapi.NewKeyboardButton(taskAddKeyboard),
 		tgbotapi.NewKeyboardButton(taskDelKeyboard),
@@ -129,7 +128,6 @@ func sendWelcome(chatID int64, msg string) {
 	)
 	rm := tgbotapi.NewReplyKeyboard(row)
 	ctx.SendMessageText(chatID, msg, 0, rm)
-
 	if err := deleteUserStates(ctx, chatID); err != nil {
 		ctx.Log().Errorf("Unable to delete user states: %s", err)
 	}
@@ -218,7 +216,7 @@ func listTask(msg *tgbotapi.Message) {
 		return
 	}
 	if len(tasks) == 0 {
-		sendWelcome(msg.Chat.ID, "У вас нет задач!")
+		sendWelcome(msg.Chat.ID, "You have no tasks!")
 		return
 	}
 
@@ -226,7 +224,7 @@ func listTask(msg *tgbotapi.Message) {
 		lines = append(lines, task.String())
 	}
 
-	ctx.SendMessageMarkdown(msg.Chat.ID, fmt.Sprintf("Ваши задачи:\n%s", strings.Join(lines, "\n")), 0, nil)
+	ctx.SendMessageMarkdown(msg.Chat.ID, fmt.Sprintf("Your tasks:\n%s", strings.Join(lines, "\n")), 0, nil)
 }
 
 func sendSelectType(msg *tgbotapi.Message) {
@@ -385,7 +383,7 @@ func getReminderValues(msg *tgbotapi.Message) {
 			sendError(msg.Chat.ID)
 			return
 		} else if ut == nil {
-			ctx.SendMessageMarkdown(msg.Chat.ID, "Такой задачи не найдено!", msg.MessageID, nil)
+			ctx.SendMessageMarkdown(msg.Chat.ID, "No such task was found!", msg.MessageID, nil)
 			return
 		}
 		if err = ut.Delete(); err != nil {
@@ -449,11 +447,11 @@ func getReminderTextNotNum(text string, rus *ReminderUserState, msg *tgbotapi.Me
 			ctx.Log().Errorf("Unable to save user task: %s", err)
 			return
 		}
-		sendWelcome(msg.Chat.ID, "Задача успешно создана.")
+		sendWelcome(msg.Chat.ID, "The task has been successfully created.")
 		return
 	}
 	if !valid {
-		ctx.SendMessageMarkdown(msg.Chat.ID, "Введено неправильное значение", 0, nil)
+		ctx.SendMessageMarkdown(msg.Chat.ID, "Invalid value entered", 0, nil)
 		addTask(msg)
 		return
 	}

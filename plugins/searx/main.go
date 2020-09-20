@@ -1,9 +1,9 @@
 package main
 
 import (
-	"gopkg.in/telegram-bot-api.v4"
-
 	"github.com/paper2code/golang-telegram-multibot/v2/pkg/context"
+	"gopkg.in/telegram-bot-api.v4"
+	// "github.com/paper2code/golang-telegram-multibot/v2/plugins/searx/models"
 )
 
 var ctx *context.MultiBotContext
@@ -16,12 +16,12 @@ func InitPlugin(mbc *context.MultiBotContext) error {
 
 // GetName function returns plugin name
 func GetName() string {
-	return "search"
+	return "searx"
 }
 
 // GetDescription function returns plugin description
 func GetDescription() string {
-	return "Paper2code search engine"
+	return "Searx is search engine aggregator"
 }
 
 // GetCommands return plugin commands for bot
@@ -31,7 +31,25 @@ func GetCommands() []string {
 
 // GetKeyboard return plugin keyboard buttons for bot
 func GetKeyboard() *tgbotapi.ReplyKeyboardMarkup {
-	return nil
+	replyKeyboard := tgbotapi.NewReplyKeyboard(
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("General"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("News"),
+			tgbotapi.NewKeyboardButton("Social"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Technology"),
+			tgbotapi.NewKeyboardButton("Science"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Images"),
+			tgbotapi.NewKeyboardButton("Videos"),
+			tgbotapi.NewKeyboardButton("Music"),
+		),
+	)
+	return &replyKeyboard
 }
 
 // UpdateHandler function call for each update
@@ -47,4 +65,7 @@ func RunCommand(command string, update tgbotapi.Update) (err error) {
 // StartCommand handler start if bot get one command 'start'
 func StartCommand(update tgbotapi.Update) (err error) {
 	return
+}
+
+func searchSearx() {
 }

@@ -128,12 +128,12 @@ plugin:
 
 ## Build all plugins
 plugins:
-	GOARCH=amd64 PLUGIN=core-log_messages make plugin	
-	GOARCH=amd64 PLUGIN=core-save_messages make plugin
-	GOARCH=amd64 PLUGIN=core-filer make plugin
-	GOARCH=amd64 PLUGIN=core-searx make plugin
-	GOARCH=amd64 PLUGIN=core-ssh make plugin
-	GOARCH=amd64 PLUGIN=paper2code-mashup make plugin
-	GOARCH=amd64 PLUGIN=paper2code-search make plugin
-	GOARCH=amd64 PLUGIN=paper2code-trends make plugin
+	#GOARCH=amd64 PLUGIN=core-log_messages make plugin	
+	#GOARCH=amd64 PLUGIN=core-save_messages make plugin
+	#GOARCH=amd64 PLUGIN=core-reminder make plugin
+	#GOARCH=amd64 PLUGIN=core-filer make plugin
+	#GOARCH=amd64 PLUGIN=searx make plugin
+	#GOARCH=amd64 PLUGIN=core-ssh make plugin
+	#GOARCH=amd64 PLUGIN=core-rules make plugin
+	GOARCH=amd64 PLUGIN=paper2code make plugin
 .PHONY: plugins

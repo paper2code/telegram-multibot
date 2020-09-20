@@ -8,4 +8,5 @@ require (
 	github.com/labstack/gommon v0.3.0
 	github.com/paper2code/golang-telegram-multibot/v2 v2.0.0-00010101000000-000000000000
 	gopkg.in/telegram-bot-api.v4 v4.6.4
+	gorm.io/gorm v1.20.1
 )

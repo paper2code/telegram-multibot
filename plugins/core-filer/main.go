@@ -74,7 +74,7 @@ func UpdateHandler(update tgbotapi.Update) (err error) {
 	if err = f.Upload(); err != nil {
 		return
 	}
-	ctx.SendMessageMarkdown(update.Message.Chat.ID, fmt.Sprintf("Секрет: %s", f.SecretPhrase), 0, nil)
+	ctx.SendMessageMarkdown(update.Message.Chat.ID, fmt.Sprintf("Secret: %s", f.SecretPhrase), 0, nil)
 	return nil
 }
 
@@ -87,7 +87,7 @@ func RunCommand(command string, update tgbotapi.Update) (err error) {
 func StartCommand(update tgbotapi.Update) (err error) {
 	msg := fmt.Sprintf(`Welcome to the plugin "Filer"
 Send the file to the bot, you will receive a secret word in response, write it down and transfer it to the person to whom the file is addressed, for this secret word the file can be obtained.
-Enjoy using the "File"!`)
+Enjoy using the "Filer"!`)
 	ctx.SendMessageMarkdown(update.Message.Chat.ID, msg, 0, nil)
 	return
 }

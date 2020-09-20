@@ -56,6 +56,12 @@ func (ctx *MultiBotContext) SendMessageText(chatID int64, text string, replyID i
 	ctx.sendMessage(chatID, text, replyID, "", replyMarkup)
 }
 
+// SendMessageHtml send message from bot to chat with ID == chatID and text
+// if replyID != 0 message send as reply
+func (ctx *MultiBotContext) SendMessageHtml(chatID int64, text string, replyID int, replyMarkup interface{}) {
+	ctx.sendMessage(chatID, text, replyID, "Html", replyMarkup)
+}
+
 // SendMessageMarkdown send message from bot to chat with ID == chatID and text
 // if replyID != 0 message send as reply
 func (ctx *MultiBotContext) SendMessageMarkdown(chatID int64, text string, replyID int, replyMarkup interface{}) {

@@ -5,11 +5,14 @@ import (
 	"math/rand"
 	"time"
 
+	"gorm.io/gorm"
+
 	"github.com/labstack/gommon/log"
 )
 
 // File is a struct for store secret phrases for uploaded files
 type File struct {
+	gorm.Model
 	FileID       string
 	FileName     string
 	SecretPhrase string
@@ -34,7 +37,7 @@ func (f *File) Upload() (err error) {
 		log.Errorf("Unable to get file from telegram with ID %s: %s", f.FileID, err)
 		return
 	}
-	if err = ctx.GetDB().Save(&f).Error; err != nil {
+	if err = ctx.GetDB().Create(&f).Error; err != nil {
 		log.Errorf("Unable to store file in database: %s", err)
 		return
 	}

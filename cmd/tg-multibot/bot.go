@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"strings"
-	"time"
 
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/telegram-bot-api.v4"
@@ -81,7 +80,7 @@ func botCommandsHandler(update tgbotapi.Update) {
 }
 
 func botStartHandler(update tgbotapi.Update) {
-	startCommand(update)
+	// startCommand(update)
 	// botContext.SendMessageMarkdown(update.Message.Chat.ID, "*Hi!*", 0, nil)
 	for name, botPlugin := range botPlugins {
 		if err := botPlugin.StartCommandHandler(update); err != nil {
@@ -115,7 +114,7 @@ func startCommand(update tgbotapi.Update) {
 	}
 
 	for _, story := range stories {
-		consumeChainMessage(story)
+		models.ConsumeChainMessage(bot, story)
 	}
 }
 
@@ -159,7 +158,7 @@ func backCommand(update tgbotapi.Update) {
 		},
 	}
 	for _, story := range stories {
-		consumeChainMessage(story)
+		models.ConsumeChainMessage(bot, story)
 	}
 }
 
@@ -174,38 +173,4 @@ func breakCommand(message string) (string, []string, bool) {
 		arguments = strings.Split(command[1], ",")
 	}
 	return command[0], arguments, true
-}
-
-func consumeChainMessage(structure models.Message) {
-	switch structure.MsgType {
-	case "Message":
-		var response tgbotapi.MessageConfig = tgbotapi.NewMessage(structure.ChatID, structure.Content)
-		response.ParseMode = "Markdown"
-		if structure.Keyboard != nil {
-			response.ReplyMarkup = structure.Keyboard
-		}
-		sendMsg(response)
-
-	case "NewDocumentUpload":
-		var response tgbotapi.DocumentConfig = tgbotapi.NewDocumentUpload(structure.ChatID, structure.Content)
-		if structure.Keyboard != nil {
-			response.ReplyMarkup = structure.Keyboard
-		}
-		sendMsg(response)
-
-	case "NewPhotoUpload":
-		var response tgbotapi.PhotoConfig = tgbotapi.NewPhotoUpload(structure.ChatID, structure.Content)
-		if structure.Keyboard != nil {
-			response.ReplyMarkup = structure.Keyboard
-		}
-		sendMsg(response)
-	}
-	time.Sleep(structure.Duration * time.Second)
-}
-
-// SendMsg - Send telegram message
-func sendMsg(response tgbotapi.Chattable) {
-	if _, err := bot.Send(response); err != nil {
-		log.Panicln(err)
-	}
 }

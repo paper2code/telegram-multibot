@@ -74,8 +74,9 @@ var (
 
 // ReminderUserState struct for store user command queue state
 type ReminderUserState struct {
-	ChatID    int64  `sql:",pk"`
-	Command   string `sql:",pk"`
+	gorm.Model
+	ChatID    int64
+	Command   string
 	Type      string
 	Year      int
 	Month     int
@@ -106,20 +107,17 @@ func (rus *ReminderUserState) Save() (err error) {
 		ChatID:  rus.ChatID,
 		Command: rus.Command,
 	}
-
 	rus.Timestamp = time.Now()
-	if err = db.Find(temp).; err != nil && err != pg.ErrNoRows {
-		return
-	} else if err == pg.ErrNoRows || temp == nil {
-		return db.Insert(rus)
+	if err = db.First(temp).Error; err == nil && err == gorm.ErrRecordNotFound {
+		return ctx.GetDB().Create(&rus).Error
 	}
-	return db.Update(rus)
+	return ctx.GetDB().Save(&rus).Error
 }
 
 // getReminderUserState function return user state from database
 func getReminderUserState(chatID int64, cmd string) (rus *ReminderUserState, err error) {
 	rus = initReminderUserState(chatID, cmd)
-	if err = ctx.GetDB().Find(rus); err != nil {
+	if err = ctx.GetDB().Find(rus).Error; err != nil {
 		return nil, nil
 	} else if err != nil {
 		return
@@ -143,7 +141,7 @@ func getReminderUserStates(chatID int64) (rusA, rusD *ReminderUserState, err err
 
 // Delete function remove user state from database after timeout or complete command
 func (rus *ReminderUserState) Delete() (err error) {
-	err = ctx.GetDB().Delete(rus)
+	err = ctx.GetDB().Delete(rus).Error
 	return
 }
 
@@ -175,12 +173,12 @@ func deleteUserStates(ctx *context.MultiBotContext, chatID int64) (err error) {
 		ctx.Log().Errorf("Unable to get user states: %s", err)
 	} else {
 		if rusA != nil {
-			if err = rusA.Delete(); err != nil {
+			if err = ctx.GetDB().Delete(&rusA).Error; err != nil {
 				return err
 			}
 		}
 		if rusD != nil {
-			if err = rusD.Delete(); err != nil {
+			if err = ctx.GetDB().Delete(&rusD).Error; err != nil {
 				return err
 			}
 		}

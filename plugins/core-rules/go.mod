@@ -1,4 +1,4 @@
-module github.com/paper2code/golang-telegram-multibot/v2/plugins/core-searx
+module github.com/paper2code/golang-telegram-multibot/v2/plugins/core-rules
 
 replace github.com/paper2code/golang-telegram-multibot/v2 => ../..
 

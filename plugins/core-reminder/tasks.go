@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"time"
 
-	// "github.com/go-pg/pg"
 	"gorm.io/gorm"
 )
 
 // UserTask struct for store user tasks
 type UserTask struct {
+	gorm.Model
 	ChatID  int64  `sql:",pk"`
 	Name    string `sql:",pk"`
 	Type    string
@@ -32,12 +32,12 @@ func (ut *UserTask) Save() (err error) {
 	}
 	setTimerAndRunJob(*ut)
 
-	if err = db.First(temp).Error; err != nil && err != pg.ErrNoRows {
+	if err = db.First(temp).Error; err != nil && err != gorm.ErrRecordNotFound {
 		return
-	} else if err == pg.ErrNoRows || temp == nil {
-		return db.Insert(ut)
+	} else if err == gorm.ErrRecordNotFound || temp == nil {
+		return db.Create(&ut).Error
 	}
-	if err = db.Update(ut); err != nil {
+	if err = db.Save(ut).Error; err != nil {
 		return
 	}
 	return
@@ -45,7 +45,7 @@ func (ut *UserTask) Save() (err error) {
 
 // Delete function remove user task from database
 func (ut *UserTask) Delete() (err error) {
-	if err = ctx.GetDB().Delete(ut); err != nil {
+	if err = ctx.GetDB().Delete(ut).Error; err != nil {
 		return
 	}
 
@@ -160,12 +160,12 @@ func (ut *UserTask) String() (result string) {
 }
 
 func getUserTasks(chatID int64) (tasks []UserTask, err error) {
-	err = ctx.GetDB().Model(&tasks).Where("chat_id = ?", chatID).Select()
+	err = ctx.GetDB().Where("chat_id = ?", chatID).Find(&tasks).Error
 	return
 }
 
 func getAllTasks() (tasks []UserTask, err error) {
-	err = ctx.GetDB().Model(&tasks).Select()
+	err = ctx.GetDB().Find(&tasks).Error
 	return
 }
 

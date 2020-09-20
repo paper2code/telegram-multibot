@@ -16,12 +16,12 @@ func InitPlugin(mbc *context.MultiBotContext) error {
 
 // GetName function returns plugin name
 func GetName() string {
-	return "mashup"
+	return "template"
 }
 
 // GetDescription function returns plugin description
 func GetDescription() string {
-	return "Paper2code mashup"
+	return "This is template plugin for multibot"
 }
 
 // GetCommands return plugin commands for bot
