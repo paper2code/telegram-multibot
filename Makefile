@@ -142,11 +142,11 @@ plugin:
 
 ## Build all plugins
 plugins:
-	#GOARCH=amd64 PLUGIN=messages-log make plugin	
-	#GOARCH=amd64 PLUGIN=messages-save make plugin
-	#GOARCH=amd64 PLUGIN=reminder make plugin
-	#GOARCH=amd64 PLUGIN=filer make plugin
-	#GOARCH=amd64 PLUGIN=ssh make plugin
+	GOARCH=amd64 PLUGIN=messages-log make plugin	
+	GOARCH=amd64 PLUGIN=messages-save make plugin
+	GOARCH=amd64 PLUGIN=reminder make plugin
+	GOARCH=amd64 PLUGIN=filer make plugin
+	GOARCH=amd64 PLUGIN=ssh make plugin
 	#GOARCH=amd64 PLUGIN=chatbot-gtp2tf make plugin	
 	#GOARCH=amd64 PLUGIN=chatbot-deeppavlov make plugin
 	GOARCH=amd64 PLUGIN=haystack make plugin

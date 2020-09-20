@@ -29,13 +29,16 @@ RUN git clone --depth=1 https://github.com/intel/hyperscan /tmp/hyperscan && \
 
 ENV PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib64/pkgconfig
 
-RUN go build -ldflags "-extldflags=-static -extldflags=-lm" -o /go/bin/tg-multibot ./cmd/tg-multibot
+RUN go build -ldflags "-extldflags=-static -extldflags=-lm" -o /go/bin/tg-multibot ./cmd/tg-multibot && \
+    make deps && \
+    make plugins
 
 FROM alpine:3.12
 
 RUN apk add --no-cache ca-certificates
 
 COPY --from=build /go/bin/tg-multibot /usr/bin/tg-multibot
+COPY --from=build /go/src/github.com/paper2code/telegram-multibot/shared/plugins /usr/bin/shared/plugins
 
 # copy hyperscan dependecy
 COPY --from=build /usr/local/lib64/pkgconfig/libhs.pc /usr/local/lib64/pkgconfig/libhs.pc

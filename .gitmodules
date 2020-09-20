@@ -77,3 +77,12 @@
 [submodule ".docker/manticore-docker"]
 	path = .docker/manticore-docker
 	url = https://github.com/paper2code/manticore-docker
+[submodule ".docker/let_me_answer_for_you"]
+	path = .docker/let_me_answer_for_you
+	url = https://github.com/paper2code/let_me_answer_for_you
+[submodule ".docker/hyperscan"]
+	path = .docker/hyperscan
+	url = https://github.com/paper2code/hyperscan
+[submodule ".docker/bert-extractive-summarizer"]
+	path = .docker/bert-extractive-summarizer
+	url = https://github.com/paper2code/bert-extractive-summarizer

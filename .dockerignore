@@ -1,7 +1,11 @@
-.git
-.git/
-.git/*
-.git/**
+.docker
+.docker/
+.docker/*
+.docker/**
+#.git
+#.git/
+#.git/*
+#.git/**
 multibot.toml
 *.swp
 bin_plugins
@@ -12,3 +16,5 @@ golang-telegram-multibot
 .DS_Store
 multibot.txt
 .env
+Dockerfile*
+docker-compose.*

@@ -6,14 +6,41 @@ services:
     image: paper2code/telegram-multibot:latest
     build:
       context: .
-      dockerfile: dockerfile
-    command: ["tg-multibot"]
-
-  admin:
-    image: paper2code/telegram-multibot-admin:latest
-    build:
-      context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
     - 8087:8087
-    command: ["tg-admin"]
+    networks:
+    - internal
+    - web
+    command: ["tg-multibot"]
+
+  mysql:
+    image: paper2code/mysql-multi:5-ubuntu
+    build:
+      context: .docker/mysql5-multi
+      dockerfile: Dockerfile
+    container_name: ${NAMESPACE}-multidb
+    ports:
+    - 3309:3306
+    volumes:
+    - db-data:/var/lib/mysql
+    - ./.config/mysql/milvus.cnf:/etc/mysql/conf.d/my.cnf
+    # - ${PWD}/shared/export/:/var/lib/mysql/export/
+    networks:
+    - internal
+    - web
+    environment:
+      MYSQL_MULTIPLE_DATABASES: paper2telegram
+      MYSQL_PASSWORD: ${P2TG_MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${P2TG_MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${P2TG_MYSQL_USER}
+    restart: unless-stopped
+
+networks:
+  internal:
+    driver: bridge
+  web:
+    external: true
+
+volumes:
+  db-data:
