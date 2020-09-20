@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/k0kubun/pp"
+	// "github.com/k0kubun/pp"
 	"github.com/paper2code/golang-telegram-multibot/v2/pkg/context"
 	"github.com/paper2code/golang-telegram-multibot/v2/pkg/models"
 	"gopkg.in/telegram-bot-api.v4"
@@ -12,17 +12,46 @@ import (
 )
 
 var (
-	cmdMap = map[string]*models.Command{
-		// "home":     &models.Command{Func: cmd.Home, Name: "home", Keyboard: "Paper2code Home"},
-		"add":      &models.Command{Func: cmd.Add, Name: "add", Keyboard: "Add Paper/Repository"},
-		"search":   &models.Command{Func: cmd.Search, Name: "search", Keyboard: "Search Paper"},
-		"question": &models.Command{Func: cmd.Question, Name: "question", Keyboard: "Question ?"},
-		"mashup":   &models.Command{Func: cmd.Mashup, Name: "mashup", Keyboard: "Mashup"},
-		"trending": &models.Command{Func: cmd.Search, Name: "trending", Keyboard: "Trending"},
-		"feeds":    &models.Command{Func: cmd.Feeds, Name: "feeds", Keyboard: "Feeds"},
+	ctx     *context.MultiBotContext
+	options map[string]interface{}
+	cmdMap  = map[string]*models.Command{
+		"add": &models.Command{
+			Func:        cmd.Add,
+			Name:        "add",
+			Keyboard:    "Add Paper/Repository",
+			Description: "Add Paper/Repository to paper2code.com",
+		},
+		"search": &models.Command{
+			Func:        cmd.Search,
+			Name:        "search",
+			Keyboard:    "Search Paper",
+			Description: "Search a paper in the paper2code database.",
+		},
+		"question": &models.Command{
+			Func:        cmd.Question,
+			Name:        "question",
+			Keyboard:    "Question ?",
+			Description: "Ask a question about a paper/publications from the paper2code database",
+		},
+		"mashup": &models.Command{
+			Func:        cmd.Mashup,
+			Name:        "mashup",
+			Keyboard:    "Mashup",
+			Description: "Get the latest news from the paper2code daily mashup",
+		},
+		"trending": &models.Command{
+			Func:        cmd.Search,
+			Name:        "trending",
+			Keyboard:    "Trending",
+			Description: "Get the trending papers from the paper2code index.",
+		},
+		"feeds": &models.Command{
+			Func:        cmd.Feeds,
+			Name:        "feeds",
+			Keyboard:    "Feeds",
+			Description: "Get the list of RSS feeds to follow available at paper2code.com",
+		},
 	}
-	ctx             *context.MultiBotContext
-	options         map[string]interface{}
 	endpoint, token string
 )
 
@@ -74,7 +103,6 @@ func GetKeyboard() *tgbotapi.ReplyKeyboardMarkup {
 			buttons[i] = nil
 		}
 	}
-	pp.Println("buttons:", buttons)
 	rkm := tgbotapi.NewReplyKeyboard(buttons...)
 	rkm.OneTimeKeyboard = true
 	rkm.Selective = true
@@ -104,6 +132,10 @@ func RunCommand(command string, update tgbotapi.Update) (err error) {
 
 // StartCommand handler start if bot get one command 'start'
 func StartCommand(update tgbotapi.Update) (err error) {
-	// pluginName := GetName()
+	home, err := Asset("views/start.tmpl")
+	if err != nil {
+		return err
+	}
+	ctx.SendMessageMarkdown(update.Message.Chat.ID, string(home), 0, nil)
 	return
 }

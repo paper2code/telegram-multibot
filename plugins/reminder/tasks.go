@@ -10,8 +10,8 @@ import (
 // UserTask struct for store user tasks
 type UserTask struct {
 	gorm.Model
-	ChatID  int64  `sql:",pk"`
-	Name    string `sql:",pk"`
+	ChatID  int64
+	Name    string
 	Type    string
 	Year    int
 	Month   int

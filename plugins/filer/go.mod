@@ -1,11 +1,11 @@
-module github.com/paper2code/golang-telegram-multibot/v2/plugins/core-reminder
+module github.com/paper2code/golang-telegram-multibot/v2/plugins/filer
 
 replace github.com/paper2code/golang-telegram-multibot/v2 => ../..
 
 go 1.15
 
 require (
-	github.com/go-pg/pg v8.0.7+incompatible
+	github.com/labstack/gommon v0.3.0
 	github.com/paper2code/golang-telegram-multibot/v2 v2.0.0-00010101000000-000000000000
 	gopkg.in/telegram-bot-api.v4 v4.6.4
 	gorm.io/gorm v1.20.1

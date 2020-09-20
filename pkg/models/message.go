@@ -27,27 +27,27 @@ func ConsumeChainMessage(bot *tgbotapi.BotAPI, structure Message) {
 		if structure.Keyboard != nil {
 			response.ReplyMarkup = structure.Keyboard
 		}
-		sendMsg(bot, response)
+		SendMsg(bot, response)
 
 	case "NewDocumentUpload":
 		var response tgbotapi.DocumentConfig = tgbotapi.NewDocumentUpload(structure.ChatID, structure.Content)
 		if structure.Keyboard != nil {
 			response.ReplyMarkup = structure.Keyboard
 		}
-		sendMsg(bot, response)
+		SendMsg(bot, response)
 
 	case "NewPhotoUpload":
 		var response tgbotapi.PhotoConfig = tgbotapi.NewPhotoUpload(structure.ChatID, structure.Content)
 		if structure.Keyboard != nil {
 			response.ReplyMarkup = structure.Keyboard
 		}
-		sendMsg(bot, response)
+		SendMsg(bot, response)
 	}
 	time.Sleep(structure.Duration * time.Second)
 }
 
 // SendMsg - Send telegram message
-func sendMsg(bot *tgbotapi.BotAPI, response tgbotapi.Chattable) {
+func SendMsg(bot *tgbotapi.BotAPI, response tgbotapi.Chattable) {
 	if _, err := bot.Send(response); err != nil {
 		log.Panicln(err)
 	}

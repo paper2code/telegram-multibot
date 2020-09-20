@@ -59,9 +59,18 @@ clean:
 	# -rm -rf release autogen var/assets/ui pkg/assets/statik.go
 .PHONY: clean
 
+## Dependencies
+deps:
+	export GO111MODULE=off
+	echo ">>> Installing dependencies"
+	go get -u github.com/go-bindata/go-bindata/...
+	export GO111MODULE=on
+.PHONY: deps
+
 ## Run code generation
 autogen:
 	echo ">>> Generating code ..."
+	package 
 	# goagen bootstrap -o autogen -d $(BASE_PACKAGE)/$(APPNAME)/v3/design
 	# echo ">>> Moving Swagger files to assets ..."
 	# cp -f $(root_dir)/autogen/swagger/** $(root_dir)/var/assets/
@@ -122,18 +131,19 @@ distribution:
 ## Bulid plugin (defined by PLUGIN variable)
 plugin:
 	-mkdir -p shared/plugins
+	if [ -d "plugins/$(PLUGIN)" ]; then cd plugins/$(PLUGIN) && go-bindata views/... ; fi 
 	echo ">>> Building: $(PLUGIN_SO) $(VERSION) for $(GOOS)-$(GOARCH) ..."
 	cd plugins/$(PLUGIN) && GOOS=$(GOOS) GOARCH=$(GOARCH) go build -buildmode=plugin -o ../../shared/plugins/$(PLUGIN_SO)
 .PHONY: plugin
 
 ## Build all plugins
 plugins:
-	#GOARCH=amd64 PLUGIN=core-log_messages make plugin	
-	#GOARCH=amd64 PLUGIN=core-save_messages make plugin
-	#GOARCH=amd64 PLUGIN=core-reminder make plugin
-	#GOARCH=amd64 PLUGIN=core-filer make plugin
+	#GOARCH=amd64 PLUGIN=messages-log make plugin	
+	#GOARCH=amd64 PLUGIN=messages-save make plugin
+	#GOARCH=amd64 PLUGIN=reminder make plugin
+	#GOARCH=amd64 PLUGIN=filer make plugin
 	#GOARCH=amd64 PLUGIN=searx make plugin
-	#GOARCH=amd64 PLUGIN=core-ssh make plugin
-	#GOARCH=amd64 PLUGIN=core-rules make plugin
+	#GOARCH=amd64 PLUGIN=ssh make plugin
+	#GOARCH=amd64 PLUGIN=hyperscan make plugin
 	GOARCH=amd64 PLUGIN=paper2code make plugin
 .PHONY: plugins

@@ -1,4 +1,4 @@
-module github.com/paper2code/golang-telegram-multibot/v2/plugins/core-ssh
+module github.com/paper2code/golang-telegram-multibot/v2/plugins/hyperscan
 
 replace github.com/paper2code/golang-telegram-multibot/v2 => ../..
 

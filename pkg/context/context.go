@@ -59,7 +59,7 @@ func (ctx *MultiBotContext) SendMessageText(chatID int64, text string, replyID i
 // SendMessageHtml send message from bot to chat with ID == chatID and text
 // if replyID != 0 message send as reply
 func (ctx *MultiBotContext) SendMessageHtml(chatID int64, text string, replyID int, replyMarkup interface{}) {
-	ctx.sendMessage(chatID, text, replyID, "Html", replyMarkup)
+	ctx.sendMessage(chatID, text, replyID, "HTML", replyMarkup)
 }
 
 // SendMessageMarkdown send message from bot to chat with ID == chatID and text
@@ -75,7 +75,7 @@ func (ctx *MultiBotContext) sendMessage(chatID int64, text string, replyID int, 
 
 	if len(text) > telegramMaximumMessageSize {
 		log.Debugf("Message to big, size %d, send as file", len(text))
-		ctx.SendMessageMarkdown(chatID, "* Сообщение слишком большое. Текст будет отправлен в виде файла! *", replyID, replyMarkup)
+		ctx.SendMessageMarkdown(chatID, "* The message is too big. The text will be sent as a file! *", replyID, replyMarkup)
 		filename := ctx.saveTextToFileAndGetName(text)
 		ctx.SendFile(chatID, replyID, filename, "text/plain")
 		return
