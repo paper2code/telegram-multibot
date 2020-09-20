@@ -68,3 +68,6 @@
 [submodule ".docker/searx-telegram"]
 	path = .docker/searx-telegram
 	url = https://github.com/paper2code/searx_bot
+[submodule ".docker/searx-telegram-js"]
+	path = .docker/searx-telegram-js
+	url = https://github.com/paper2code/searxbot
