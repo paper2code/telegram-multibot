@@ -86,3 +86,15 @@
 [submodule ".docker/bert-extractive-summarizer"]
 	path = .docker/bert-extractive-summarizer
 	url = https://github.com/paper2code/bert-extractive-summarizer
+[submodule ".docker/nboost"]
+	path = .docker/nboost
+	url = https://github.com/paper2code/nboost
+[submodule ".docker/jina"]
+	path = .docker/jina
+	url = https://github.com/paper2code/jina
+[submodule ".docker/jina-examples"]
+	path = .docker/jina-examples
+	url = https://github.com/paper2code/jina-ai-examples
+[submodule ".docker/jinai-examples"]
+	path = .docker/jinai-examples
+	url = https://github.com/paper2code/jinai-examples
