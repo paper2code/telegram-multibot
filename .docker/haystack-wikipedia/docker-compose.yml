@@ -1,0 +1,45 @@
+---
+version: '3.8'
+services:
+
+  wikipedia-convert:
+    image: paper2code/wikipedia-convert:latest-slim
+    container_name: ${NAMESPACE}-convert
+    networks:
+    - internal
+    volumes:
+    - wiki-data:/opt/data
+    command: ["./scripts/extract_wikipedia.sh"]
+
+  elastic:
+    image: elasticsearch:7.6.2
+    container_name: ${NAMESPACE}-elastic
+    networks:
+    - internal
+    environment:
+    - discovery.type=single-node
+    volumes:
+    - es-data:/usr/share/elasticsearch/data
+    ulimits:
+      nproc: 65535
+      nofile:
+         soft: 65535
+         hard: 65535
+      memlock:
+        soft: -1
+        hard: -1
+    restart: unless-stopped
+
+networks:
+  internal:
+    driver: bridge
+  #web:
+  #  external: true
+
+volumes:
+  es-data:
+  wiki-data:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/../../shared/datasets  
