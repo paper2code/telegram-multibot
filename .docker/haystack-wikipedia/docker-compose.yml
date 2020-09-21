@@ -4,6 +4,9 @@ services:
 
   wikipedia-convert:
     image: paper2code/wikipedia-convert:latest-slim
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: ${NAMESPACE}-convert
     networks:
     - internal

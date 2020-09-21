@@ -3,7 +3,7 @@
 set -x
 set -e
 
-python3 -m wikiextractor.WikiExtractor -o "../../shared/datasets/wikipedia/" --json \
+python3 -m wikiextractor.WikiExtractor -o "/opt/data/wikipedia/" --json \
 --filter_disambig_page \
 --processes 8 \
-"../../shared/datasets/enwiki-latest-pages-articles.xml.bz2"
+"/opt/data/enwiki-latest-pages-articles.xml.bz2"

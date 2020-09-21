@@ -1,2 +1,1 @@
 wikiextractor
-git+https://github.com/deepset-ai/haystack/archive/0.3.0.zip
